@@ -11,7 +11,7 @@ let cards = [];
 let age = 25;
 
 
-// MEthod to check user age 
+// Method to check user age 
 if(age >= 21) {
     console.log("Welcome to The Blackjack Game.")
 }else{
@@ -37,26 +37,22 @@ function pickCard() {
 function startGame() {
     
     firstCard = pickCard();
-    console.log("First card:", firstCard);
     secondCard = pickCard();
-    console.log("Second:", secondCard);
-    cards = [firstCard, secondCard];                 //Storing generated cards to array for accessibility 
+    cards = [firstCard, secondCard];                  //Storing generated cards to array for accessibility 
     console.log(cards);
     cardsEl.textContent = "Cards:";                   //resetting old value inside cardsEl otherwise the existing first two card value get repeatedly displayed.
     sumOfCards = 0;                                   //resetting value of sum
     for(let i = 0; i < cards.length; i++) {           
         cardsEl.textContent += `${cards[i]},`;  
         sumOfCards += cards[i];                     
-    } 
-    let toTrimText = cardsEl.textContent;          
-    let trimmedText = toTrimText.slice(0, -1);
-    cardsEl.textContent = trimmedText;
+    }
+    cardsEl.textContent = trim(cardsEl.textContent);
     sumEl.textContent = `Total Value: ${sumOfCards}`;
     checkScore();
 
 }
 
-//Method to pick extra cards
+// Method to pick extra cards
 function pickAnotherCard() {
 
     if(hasBlackjack == false && isAlive == true) {
@@ -67,10 +63,8 @@ function pickAnotherCard() {
         for(let i = 0; i < cards.length; i++) {           
             cardsEl.textContent += ` ${cards[i]},`;
             sumOfCards += cards[i];                       //adding all cards to calculate total value
-        } 
-        let toTrimText = cardsEl.textContent;          
-        let trimmedText = toTrimText.slice(0, -1);        //removing excess comma
-        cardsEl.textContent = trimmedText;                //updating card-el value on screen
+        }           
+        cardsEl.textContent = trim(cardsEl.textContent);  //updating card-el value on screen
         sumEl.textContent = `Total Value: ${sumOfCards}`; //updating sum-el value on screen
         checkScore();
         console.log("Blackjack status",hasBlackjack );
@@ -83,7 +77,7 @@ function pickAnotherCard() {
 }
 
 
-//Method to check final result and display message
+// Method to check final result and display message
 function checkScore() {
 
     if(sumOfCards <= 20) {
@@ -100,4 +94,11 @@ function checkScore() {
 
     // Final message
     messageEl.textContent = message;
+}
+
+
+// Method to trim the excess comma from resulting string
+function trim(toTrimText) {  
+    let trimmedText = toTrimText.slice(0, -1);
+    return trimmedText;
 }
