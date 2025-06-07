@@ -1,3 +1,6 @@
+let messageEl = document.getElementById("message-el");
+let cardsEl = document.getElementById("cards-el");
+let sumEl = document.getElementById("sum-el");
 let hasBlackjack = false;
 let isAlive = true;
 let message = '';
@@ -26,21 +29,21 @@ function startGame() {
     let firstCard = pickCard();
     let secondCard = pickCard();
     let sumOfCards = firstCard + secondCard;
-    console.log("Your total card value:", sumOfCards)
-    console.log("Your second card:", secondCard)
+    cardsEl.textContent = `Cards: ${firstCard} and ${secondCard}`;
+    sumEl.textContent = `Total Value: ${sumOfCards}`;
 
     if(sumOfCards <= 20) {
-    // Checking score
-    message = "You want to draw another card?";
+        // Checking score
+        message = "Do you want to draw another card?";
 
     }else if(sumOfCards === 21) {
-    hasBlackjack = true;
-    message = "Blackjack! You won 1.5x you bet value.";
+        hasBlackjack = true;
+        message = "Blackjack! You won 1.5x of your bet value.";
     }else {
-    isAlive = false;
-    message = "Alas, you bust. You lost your money to the dealer.";
+        isAlive = false;
+        message = "You lost your money to the dealer.";
     }
 
     // Final message
-    console.log(message);
+    messageEl.textContent = message;
 }
