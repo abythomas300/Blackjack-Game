@@ -20,6 +20,7 @@ button{
     font-style: italic;
     font-size: larger;
     border-radius: 10px;
+    margin: 10px;
 }
 
 button:hover{
