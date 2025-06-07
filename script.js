@@ -1,6 +1,6 @@
-let messageEl = document.getElementById("message-el");
-let cardsEl = document.getElementById("cards-el");
-let sumEl = document.getElementById("sum-el");
+let messageEl = document.querySelector("#message-el");
+let cardsEl = document.querySelector("#cards-el");
+let sumEl = document.querySelector("#sum-el");
 let hasBlackjack = false;
 let isAlive = true;
 let message = '';
@@ -46,4 +46,5 @@ function startGame() {
 
     // Final message
     messageEl.textContent = message;
+    
 }
