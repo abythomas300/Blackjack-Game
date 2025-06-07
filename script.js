@@ -21,23 +21,37 @@ if(age >= 21) {
 
 // Method to pick a random card
 function pickCard() {
-    return Math.floor( ( Math.random()*(11 - 2 + 1) ) +2 );
+    let pickedCard = Math.floor( Math.random()*13 ) + 1;
+     console.log("Picked card", pickedCard);
+     if(pickedCard === 1) {
+        return 11;
+     }else if(pickedCard >= 11 && pickedCard <= 13) {
+        return 10;
+     }else {
+        return pickedCard;
+     }
 }
 
 
 // Method to start the game
 function startGame() {
-
-    let firstCard = pickCard();
-    let secondCard = pickCard();
+    
+    firstCard = pickCard();
+    console.log("First card:", firstCard);
+    secondCard = pickCard();
+    console.log("Second:", secondCard);
     cards = [firstCard, secondCard];                 //Storing generated cards to array for accessibility 
-    sumOfCards = cards[0] + cards[1];
+    console.log(cards);
+    cardsEl.textContent = "Cards:";                   //resetting old value inside cardsEl otherwise the existing first two card value get repeatedly displayed.
+    sumOfCards = 0;                                   //resetting value of sum
     for(let i = 0; i < cards.length; i++) {           
-        cardsEl.textContent += `${cards[i]},`;                       
+        cardsEl.textContent += `${cards[i]},`;  
+        sumOfCards += cards[i];                     
     } 
     let toTrimText = cardsEl.textContent;          
     let trimmedText = toTrimText.slice(0, -1);
     cardsEl.textContent = trimmedText;
+    sumEl.textContent = `Total Value: ${sumOfCards}`;
     checkScore();
 
 }
