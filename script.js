@@ -4,6 +4,7 @@ let sumEl = document.querySelector("#sum-el");
 let hasBlackjack = false;
 let isAlive = true;
 let message = '';
+let sumOfCards = 0;
 
 
 let age = 25;
@@ -28,8 +29,8 @@ function startGame() {
 
     let firstCard = pickCard();
     let secondCard = pickCard();
-    let sumOfCards = firstCard + secondCard;
-    cardsEl.textContent = `Cards: ${firstCard} and ${secondCard}`;
+    sumOfCards = firstCard + secondCard;
+    cardsEl.textContent = `Cards: ${firstCard}, ${secondCard}`;
     sumEl.textContent = `Total Value: ${sumOfCards}`;
 
     if(sumOfCards <= 20) {
@@ -46,5 +47,15 @@ function startGame() {
 
     // Final message
     messageEl.textContent = message;
+
+}
+
+
+function pickAnotherCard() {
+
+    let newCard = pickCard();                         // picking new card
+    cardsEl.textContent += `, ${newCard}`;            // updating card-el value on screen
+    sumOfCards += newCard;                            // updating total value
+    sumEl.textContent = `Total Value: ${sumOfCards}`; //updating sum-el value on screen
     
 }
