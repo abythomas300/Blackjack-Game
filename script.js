@@ -21,6 +21,7 @@ if(age >= 21) {
 
 // Method to pick a random card
 function pickCard() {
+
     let pickedCard = Math.floor( Math.random()*13 ) + 1;
      console.log("Picked card", pickedCard);
      if(pickedCard === 1) {
@@ -30,6 +31,7 @@ function pickCard() {
      }else {
         return pickedCard;
      }
+
 }
 
 
@@ -38,37 +40,42 @@ function startGame() {
     
     firstCard = pickCard();
     secondCard = pickCard();
+
     cards = [firstCard, secondCard];                  //Storing generated cards to array for accessibility 
-    console.log(cards);
+
     cardsEl.textContent = "Cards:";                   //resetting old value inside cardsEl otherwise the existing first two card value get repeatedly displayed.
     sumOfCards = 0;                                   //resetting value of sum
-    for(let i = 0; i < cards.length; i++) {           
-        cardsEl.textContent += `${cards[i]},`;  
-        sumOfCards += cards[i];                     
-    }
+
+    showPickedCards();
+    sumPickedCards();
+
     cardsEl.textContent = trim(cardsEl.textContent);
     sumEl.textContent = `Total Value: ${sumOfCards}`;
+
     checkScore();
 
 }
+
 
 // Method to pick extra cards
 function pickAnotherCard() {
 
     if(hasBlackjack == false && isAlive == true) {
         let newCard = pickCard();                         //picking new card
-        cards.push(newCard);                              //adding the newly picked card to array           
+
+        cards.push(newCard);                              //adding the newly picked card to array  
+
         cardsEl.textContent = "Cards:";                   //resetting old value inside cardsEl otherwise the existing first two card value get repeatedly displayed.
         sumOfCards = 0;
-        for(let i = 0; i < cards.length; i++) {           
-            cardsEl.textContent += ` ${cards[i]},`;
-            sumOfCards += cards[i];                       //adding all cards to calculate total value
-        }           
+
+        showPickedCards();
+        sumPickedCards();
+
         cardsEl.textContent = trim(cardsEl.textContent);  //updating card-el value on screen
         sumEl.textContent = `Total Value: ${sumOfCards}`; //updating sum-el value on screen
+
         checkScore();
-        console.log("Blackjack status",hasBlackjack );
-        console.log("User status",isAlive );
+
     } else {
         console.log("Cannot pick another card!")
         messageEl.textContent = "Cannot pick another card!"
@@ -101,4 +108,24 @@ function checkScore() {
 function trim(toTrimText) {  
     let trimmedText = toTrimText.slice(0, -1);
     return trimmedText;
+}
+
+
+// Method to sum the values of picked cards
+function sumPickedCards() {
+
+    for(let i = 0; i < cards.length; i++) {           
+         sumOfCards += cards[i];                     
+    }
+
+}
+
+
+// Method to display picked cards
+function showPickedCards() {
+
+    for(let i = 0; i < cards.length; i++) {           
+        cardsEl.textContent += ` ${cards[i]},`;                    
+    }
+
 }
