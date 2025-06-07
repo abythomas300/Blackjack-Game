@@ -32,6 +32,24 @@ function startGame() {
     sumOfCards = firstCard + secondCard;
     cardsEl.textContent = `Cards: ${firstCard}, ${secondCard}`;
     sumEl.textContent = `Total Value: ${sumOfCards}`;
+    checkScore();
+
+}
+
+//Method to pick extra cards
+function pickAnotherCard() {
+
+    let newCard = pickCard();                         // picking new card
+    cardsEl.textContent += `, ${newCard}`;            // updating card-el value on screen
+    sumOfCards += newCard;                            // updating total value
+    sumEl.textContent = `Total Value: ${sumOfCards}`; //updating sum-el value on screen
+    checkScore();
+    
+}
+
+
+//Method to check final result and display message
+function checkScore() {
 
     if(sumOfCards <= 20) {
         // Checking score
@@ -47,15 +65,4 @@ function startGame() {
 
     // Final message
     messageEl.textContent = message;
-
-}
-
-
-function pickAnotherCard() {
-
-    let newCard = pickCard();                         // picking new card
-    cardsEl.textContent += `, ${newCard}`;            // updating card-el value on screen
-    sumOfCards += newCard;                            // updating total value
-    sumEl.textContent = `Total Value: ${sumOfCards}`; //updating sum-el value on screen
-    
 }
