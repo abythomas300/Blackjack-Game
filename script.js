@@ -5,6 +5,7 @@ let hasBlackjack = false;
 let isAlive = true;
 let message = '';
 let sumOfCards = 0;
+let cards = [];
 
 
 let age = 25;
@@ -29,9 +30,14 @@ function startGame() {
 
     let firstCard = pickCard();
     let secondCard = pickCard();
-    sumOfCards = firstCard + secondCard;
-    cardsEl.textContent = `Cards: ${firstCard}, ${secondCard}`;
-    sumEl.textContent = `Total Value: ${sumOfCards}`;
+    cards = [firstCard, secondCard];                 //Storing generated cards to array for accessibility 
+    sumOfCards = cards[0] + cards[1];
+    for(let i = 0; i < cards.length; i++) {           
+        cardsEl.textContent += `${cards[i]},`;                       
+    } 
+    let toTrimText = cardsEl.textContent;          
+    let trimmedText = toTrimText.slice(0, -1);
+    cardsEl.textContent = trimmedText;
     checkScore();
 
 }
@@ -39,9 +45,17 @@ function startGame() {
 //Method to pick extra cards
 function pickAnotherCard() {
 
-    let newCard = pickCard();                         // picking new card
-    cardsEl.textContent += `, ${newCard}`;            // updating card-el value on screen
-    sumOfCards += newCard;                            // updating total value
+    let newCard = pickCard();                         //picking new card
+    cards.push(newCard);                              //adding the newly picked card to array           
+    cardsEl.textContent = "Cards:";                   //resetting old value inside cardsEl otherwise the existing first two card value get repeatedly displayed.
+    sumOfCards = 0;
+    for(let i = 0; i < cards.length; i++) {           
+        cardsEl.textContent += ` ${cards[i]},`;
+        sumOfCards += cards[i];                       //adding all cards to calculate total value
+    } 
+    let toTrimText = cardsEl.textContent;          
+    let trimmedText = toTrimText.slice(0, -1);        //removing excess comma
+    cardsEl.textContent = trimmedText;                //updating card-el value on screen
     sumEl.textContent = `Total Value: ${sumOfCards}`; //updating sum-el value on screen
     checkScore();
     
