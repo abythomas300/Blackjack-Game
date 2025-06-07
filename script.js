@@ -59,19 +59,26 @@ function startGame() {
 //Method to pick extra cards
 function pickAnotherCard() {
 
-    let newCard = pickCard();                         //picking new card
-    cards.push(newCard);                              //adding the newly picked card to array           
-    cardsEl.textContent = "Cards:";                   //resetting old value inside cardsEl otherwise the existing first two card value get repeatedly displayed.
-    sumOfCards = 0;
-    for(let i = 0; i < cards.length; i++) {           
-        cardsEl.textContent += ` ${cards[i]},`;
-        sumOfCards += cards[i];                       //adding all cards to calculate total value
-    } 
-    let toTrimText = cardsEl.textContent;          
-    let trimmedText = toTrimText.slice(0, -1);        //removing excess comma
-    cardsEl.textContent = trimmedText;                //updating card-el value on screen
-    sumEl.textContent = `Total Value: ${sumOfCards}`; //updating sum-el value on screen
-    checkScore();
+    if(hasBlackjack == false && isAlive == true) {
+        let newCard = pickCard();                         //picking new card
+        cards.push(newCard);                              //adding the newly picked card to array           
+        cardsEl.textContent = "Cards:";                   //resetting old value inside cardsEl otherwise the existing first two card value get repeatedly displayed.
+        sumOfCards = 0;
+        for(let i = 0; i < cards.length; i++) {           
+            cardsEl.textContent += ` ${cards[i]},`;
+            sumOfCards += cards[i];                       //adding all cards to calculate total value
+        } 
+        let toTrimText = cardsEl.textContent;          
+        let trimmedText = toTrimText.slice(0, -1);        //removing excess comma
+        cardsEl.textContent = trimmedText;                //updating card-el value on screen
+        sumEl.textContent = `Total Value: ${sumOfCards}`; //updating sum-el value on screen
+        checkScore();
+        console.log("Blackjack status",hasBlackjack );
+        console.log("User status",isAlive );
+    } else {
+        console.log("Cannot pick another card!")
+        messageEl.textContent = "Cannot pick another card!"
+    }
     
 }
 
