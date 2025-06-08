@@ -46,6 +46,8 @@ function startGame() {
     cardsEl.textContent = "Cards:";                   //resetting old value inside cardsEl otherwise the existing first two card value get repeatedly displayed.
     sumOfCards = 0;                                   //resetting value of sum
 
+    messageEl.style.color = "white";                    //reset text color to white
+
     showPickedCards();
     sumPickedCards();
 
@@ -79,6 +81,7 @@ function pickAnotherCard() {
     } else {
         console.log("Cannot pick another card!")
         messageEl.textContent = "Cannot pick another card!"
+        messageEl.style.color = "red";
     }
     
 }
@@ -97,8 +100,8 @@ function checkScore() {
     }else {
         isAlive = false;
         message = "You lost your money to the dealer.";
+        messageEl.style.color = "red";                         // change color to red to highlight warning
     }
-
     // Final message
     messageEl.textContent = message;
 }
