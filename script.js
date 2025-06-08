@@ -38,6 +38,9 @@ function pickCard() {
 // Method to start the game
 function startGame() {
     
+    hasBlackjack = false;                            // resetting status at the start of a new game
+    isAlive = true;
+
     firstCard = pickCard();
     secondCard = pickCard();
 
@@ -46,7 +49,7 @@ function startGame() {
     cardsEl.textContent = "Cards:";                   //resetting old value inside cardsEl otherwise the existing first two card value get repeatedly displayed.
     sumOfCards = 0;                                   //resetting value of sum
 
-    messageEl.style.color = "white";                    //reset text color to white
+    resetTextProperties();
 
     showPickedCards();
     sumPickedCards();
@@ -62,6 +65,8 @@ function startGame() {
 // Method to pick extra cards
 function pickAnotherCard() {
 
+    resetTextProperties();
+
     if(hasBlackjack == false && isAlive == true) {
         let newCard = pickCard();                         //picking new card
 
@@ -69,6 +74,8 @@ function pickAnotherCard() {
 
         cardsEl.textContent = "Cards:";                   //resetting old value inside cardsEl otherwise the existing first two card value get repeatedly displayed.
         sumOfCards = 0;
+
+        resetTextProperties();
 
         showPickedCards();
         sumPickedCards();
@@ -90,6 +97,8 @@ function pickAnotherCard() {
 // Method to check final result and display message
 function checkScore() {
 
+    resetTextProperties();
+
     if(sumOfCards <= 20) {
         // Checking score
         message = "Do you want to draw another card?";
@@ -97,6 +106,9 @@ function checkScore() {
     }else if(sumOfCards === 21) {
         hasBlackjack = true;
         message = "Blackjack! You won 1.5x of your bet value.";
+        messageEl.style.color = "gold"; 
+        messageEl.style.webkitTextStroke = '1px blue';
+        messageEl.style.fontSize = "larger";
     }else {
         isAlive = false;
         message = "You lost your money to the dealer.";
@@ -131,4 +143,14 @@ function showPickedCards() {
         cardsEl.textContent += ` ${cards[i]},`;                    
     }
 
+}
+
+
+// Method to reset text properties
+function resetTextProperties() {
+
+    messageEl.style.color = "white";                  
+    messageEl.style.webkitTextStroke = null;
+    messageEl.style.fontSize = "large";
+    
 }
