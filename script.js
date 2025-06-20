@@ -6,7 +6,16 @@ let isAlive = true;
 let message = '';
 let sumOfCards = 0;
 let cards = [];
+let playerName = document.querySelector("#player-name");
+let playerChips = document.querySelector("#player-score");
 
+let player = {
+    name:"Aby Thomas",
+    chips: 170
+};
+
+playerName.textContent = "Player:"+player.name;
+playerChips.textContent = "Player Chips: $"+player.chips;
 
 let age = 25;
 
